@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #1d1212;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #cdde1c;
+      font-size: 2rem;
+    }
+    .input-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    #todo-input {
+      flex: 1;
+      padding: 10px;
+      font-size: 1rem;
+      border: 2px solid #3498db;
+      border-radius: 5px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    #todo-input:focus {
+      border-color: #2980b9;
+    }
+    #add-button, #test-button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #3498db;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.1s;
+    }
+    #add-button:hover, #test-button:hover {
+      background-color: #2980b9;
+      transform: scale(1.05);
+    }
+    #add-button:active, #test-button:active {
+      transform: scale(0.95);
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px;
+      margin: 10px 0;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    li.completed {
+      opacity: 0.7;
+      background-color: #ecf0f1;
+    }
+    li.completed span {
+      text-decoration: line-through;
+      color: #7f8c8d;
+    }
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    span {
+      flex: 1;
+      font-size: 1rem;
+    }
+    button.delete {
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #e74c3c;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.1s;
+    }
+    button.delete:hover {
+      background-color: #c0392b;
+      transform: scale(1.05);
+    }
+    button.delete:active {
+      transform: scale(0.95);
+    }
+    @media (max-width: 500px) {
+      .input-container {
+        flex-direction: column;
+      }
+      #todo-input, #add-button, #test-button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Todo List</h1>
+  <div class="input-container">
+    <input type="text" id="todo-input" placeholder="Add a new todo" aria-label="New todo">
+    <button id="add-button">Add</button>
+  </div>
+  <button id="test-button">Run Tests - Open console to watch</button>
+  <ul id="todo-list"></ul>
+  <script src="dist/todo.js"></script>
+  <script src="dist/tests.js"></script>
+</body>
+</html>
