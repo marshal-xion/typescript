@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
+    ul { list-style: none; padding: 0; }
+    li { display: flex; align-items: center; gap: 10px; margin: 10px 0; }
+    input[type="text"] { padding: 5px; width: 70%; }
+    button { padding: 5px 10px; }
+  </style>
+</head>
+<body>
+  <h1>Todo List</h1>
+  <div>
+    <input type="text" id="todo-input" placeholder="Add a new todo">
+    <button id="add-button">Add</button>
+  </div>
+  <ul id="todo-list"></ul>
+  <script src="dist/todo.js"></script>
+  <!-- Run tests in browser (uncomment to execute) -->
+  <script src="dist/tests.js"></script>
+</body>
+</html>
