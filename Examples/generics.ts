@@ -128,7 +128,7 @@ makeItMove(new Dog1());     // fine
 
 console.log("4)   Basic mapped type generics")
 
-type Person1{
+type Person1 = {
   name: string;
   age: number;
 }
