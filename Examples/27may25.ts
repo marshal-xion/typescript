@@ -49,3 +49,81 @@ function reverseArray<T>(items: T[]): T[] {
 console.log(reverseArray<number>([1, 2, 3, 4])); // Output: [4, 3, 2, 1]
 console.log(reverseArray<string>(["a", "b", "c"])); // Output: ["c", "b", "a"]
 console.log(reverseArray<boolean>([true, false, true])); // Output: [true, false, true]
+
+
+type A = readonly string[]
+type B = ReadonlyArray<string>
+type C = Readonly<string[]>
+
+type D = readonly [number, string]
+type E  = Readonly<[number, string]>
+
+
+
+//using call
+
+interface j1 {
+    name: string;
+    greet(message: string): void;
+}
+
+const u1: j1 = {
+    name: "jane",
+    greet(message:string){
+        console.log(`${message}, ${this.name}!`);
+    },
+}
+
+const v1 = {name:"toy"};
+
+u1.greet.call(v1, "hello"); // output hello toy!
+
+
+
+// apply
+
+interface User1 {
+  name: string;
+  greet(message: string, punctuation: string): void;
+}
+
+const User1: User1 = {
+  name: "Alice",
+  greet(message: string, punctuation: string) {
+    console.log(`${message}, ${this.name}${punctuation}`);
+  },
+};
+
+const anotherUser1 = { name: "Bob" };
+const args = ["Hi", "!"];
+
+// Borrow the greet method and call it with arguments as an array
+User1.greet.apply(anotherUser1, args); // Output: Hi, Bob!
+
+
+//bind
+
+
+interface User2 {
+  name: string;
+  greet(message: string): void;
+}
+
+const User2: User2 = {
+  name: "Alice",
+  greet(message: string) {
+    console.log(`${message}, ${this.name}!`);
+  },
+};
+
+const anotherUser2 = { name: "Bob" };
+
+// Create a new function with 'this' bound to anotherUser2
+const boundGreet = User2.greet.bind(anotherUser2);
+
+// Call the bound function later
+boundGreet("Hey"); // Output: Hey, Bob!
+
+// Example with preset arguments
+const boundGreetWithMessage = User2.greet.bind(anotherUser2, "Hello");
+boundGreetWithMessage(); // Output: Hello, Bob!
