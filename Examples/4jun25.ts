@@ -128,3 +128,62 @@ const log1: Logger = (message, ...args) => {
 
 log1("Error", 404, "Not Found"); // Output: Error 404 Not Found
 log1("Info"); // Output: Info
+
+
+
+/* interface Process {
+  (input: string): string;
+  (input: number): number;
+}
+const process: Process = (input: any) => (typeof input === "string" ? input.toUpperCase() : input * 2);
+console.log(process("hi")); // Output: HI
+console.log(process(3)); // Output: 6 */
+
+
+// //interface Process {
+//   (input: string): string;
+//   (input: number): number;
+// }
+
+// const process: Process = (input: string | number): string | number => {
+//   if (typeof input === "string") {
+//     return input.toUpperCase();
+//   }
+//   return input * 2;
+// };
+
+// console.log(process("hello")); // Output: HELLO
+// console.log(process(5)); // Output: 10
+
+
+function process11(input: string): string;
+function process11(input: number): number;
+function process11(input: string | number): string | number {
+  if (typeof input === "string") {
+    return input.toUpperCase();
+  }
+  return input * 2;
+}
+
+console.log(process11("hello")); // Output: HELLO
+console.log(process11(5)); // Output: 10
+
+
+
+class Range1 implements Iterable<number> {
+  constructor(private start: number, private end: number) {}
+  [Symbol.iterator](): Iterator<number> {
+    let current = this.start;
+    return {
+      next: (): IteratorResult<number> => {
+        if (current <= this.end) {
+          return { value: current++, done: false };
+        }
+        return { value: undefined, done: true };
+      },
+    };
+  }
+}
+for (const num of new Range1(1, 3)) {
+  console.log(num); // Output: 1, 2, 3
+}
