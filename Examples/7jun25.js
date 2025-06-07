@@ -79,7 +79,7 @@ console.log("Function with Never Return Type");
 function throwError(message) {
     throw new Error(message);
 }
-console.log(throwError("Something went wrong")); // Throws error
+//console.log(throwError("Something went wrong")); // Throws error
 console.log("Function with Void Return Type");
 function logMessage(message) {
     console.log(message);
@@ -104,3 +104,119 @@ function createAdminUser(user) {
     return `${user.name} is admin: ${user.admin}`;
 }
 console.log(createAdminUser({ name: "Eve", admin: true })); // Output: Eve is admin: true
+console.log("Function with Literal Types");
+function setStatus(status) {
+    return `Status set to ${status}`;
+}
+console.log(setStatus("active"));
+console.log("Higher-Order Function");
+function wrapFunction(fn) {
+    return (x) => fn(x) * 2;
+}
+const doubleSquare = wrapFunction(x => x * x);
+console.log(doubleSquare(5));
+console.log("Recursive Function");
+function factorial(n) {
+    return n === 0 ? 1 : n * factorial(n - 1);
+}
+console.log(factorial(5));
+console.log("Basic Class");
+class Person {
+    constructor(name) {
+        this.name = name;
+    }
+    greet() {
+        return `Hello, ${this.name}`;
+    }
+}
+const person = new Person("Frank");
+console.log(person.greet());
+console.log("Class with Public and Private Members");
+class Employee {
+    constructor(id, name) {
+        this.id = id;
+        this.name = name;
+    }
+    getDetails() {
+        return `ID: ${this.id}, Name: ${this.name}`;
+    }
+}
+const emp = new Employee(1, "Grace");
+console.log(emp.getDetails());
+console.log("Class with Protected Members");
+class Manager {
+    constructor(department) {
+        this.department = department;
+    }
+}
+class SeniorManager extends Manager {
+    getDepartment() {
+        return this.department;
+    }
+}
+const sm = new SeniorManager("IT");
+console.log(sm.getDepartment());
+console.log("Class with Readonly Property");
+class Product {
+    constructor(productId) {
+        this.productId = productId;
+    }
+}
+const prod = new Product(101);
+console.log(prod.productId);
+console.log("Class with Static Members");
+class Counter {
+    constructor() {
+        Counter.count++; // static count needs to be called with classname
+    }
+    static getCount() {
+        return Counter.count;
+    }
+}
+Counter.count = 0;
+console.log(Counter.getCount());
+new Counter();
+new Counter();
+console.log(Counter.getCount());
+console.log("Abstract Class");
+class Shape {
+}
+class Square extends Shape {
+    constructor(side) {
+        super();
+        this.side = side;
+    }
+    getArea() {
+        return this.side * this.side;
+    }
+}
+const square = new Square(4);
+console.log(square.getArea());
+console.log("Class with Getters and Setters");
+class UserProfile {
+    constructor(username) {
+        this._username = username;
+    }
+    get username() {
+        return this._username;
+    }
+    set username(value) {
+        if (value.length > 0) {
+            this._username = value;
+        }
+    }
+}
+const profile = new UserProfile("Helen");
+profile.username = "Ivy";
+console.log(profile.username);
+console.log("Class Implementing Interface");
+class DocumentItem {
+    constructor(content) {
+        this.content = content;
+    }
+    print() {
+        return this.content;
+    }
+}
+const doc = new DocumentItem("Report");
+console.log(doc.print());

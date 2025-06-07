@@ -149,7 +149,7 @@ console.log("Function with Never Return Type");
 function throwError(message: string): never {
     throw new Error(message);
 }
-console.log(throwError("Something went wrong")); // Throws error
+//console.log(throwError("Something went wrong")); // Throws error
 
 
 
@@ -210,7 +210,7 @@ console.log("Function with Literal Types");
 function setStatus(status: "active" | "inactive"): string {
     return `Status set to ${status}`;
 }
-console.log(setStatus("active")); // Output: Status set to active
+console.log(setStatus("active"));  
 
 
 
@@ -222,7 +222,7 @@ function wrapFunction(fn: (x: number) => number): (x: number) => number {
     return (x: number) => fn(x) * 2;
 }
 const doubleSquare = wrapFunction(x => x * x);
-console.log(doubleSquare(5)); // Output: 50
+console.log(doubleSquare(5));  
 
 
 
@@ -234,9 +234,170 @@ console.log("Recursive Function");
 function factorial(n: number): number {
     return n === 0 ? 1 : n * factorial(n - 1);
 }
-console.log(factorial(5)); // Output: 120
+console.log(factorial(5));  
 
 
 
 
 
+console.log("Basic Class");
+
+class Person {
+    name: string;
+    constructor(name: string){
+        this.name = name;
+    }
+    
+    greet(): string {
+        return `Hello, ${this.name}`;
+    }
+}
+
+const person = new Person("Frank");
+console.log(person.greet());
+
+
+
+
+
+console.log("Class with Public and Private Members");
+
+class Employee {
+    private id: number;
+    public name: string;
+    constructor(id: number, name: string){
+        this.id = id;
+        this.name = name;
+    }
+    getDetails(): string {
+        return `ID: ${this.id}, Name: ${this.name}`;
+    }
+}
+
+const emp = new Employee(1, "Grace");
+console.log(emp.getDetails());
+
+
+
+
+
+console.log("Class with Protected Members");
+
+class Manager {
+    protected department: string;
+    constructor(department: string){
+        this.department = department;
+    }
+}
+class SeniorManager extends Manager {
+    getDepartment(): string{
+        return this.department;
+    }
+}
+
+const sm = new SeniorManager("IT");
+console.log(sm.getDepartment()); 
+
+
+
+
+
+console.log("Class with Readonly Property");
+
+class Product {
+    readonly productId: number;
+    constructor(productId: number) {
+        this.productId = productId;
+    }
+}
+const prod = new Product(101);
+console.log(prod.productId); 
+
+
+
+
+
+console.log("Class with Static Members");
+
+class Counter {
+    static count: number = 0;
+    constructor() {
+        Counter.count++;  // static count needs to be called with classname
+    }
+    static getCount(): number {
+        return Counter.count;
+    }
+}
+console.log(Counter.getCount()); 
+new Counter();
+new Counter();
+console.log(Counter.getCount()); 
+
+
+
+
+
+console.log("Abstract Class");
+
+abstract class Shape {
+    abstract getArea(): number;
+}
+
+class Square extends Shape {
+    side: number;
+    constructor(side: number){
+        super();
+        this.side = side;
+    }
+    getArea(): number {
+        return this.side * this.side;
+    }
+}
+
+const square = new Square(4);
+console.log(square.getArea());
+
+
+
+
+
+console.log("Class with Getters and Setters");
+
+class UserProfile {
+    private _username: string;
+    constructor(username: string) {
+        this._username = username;
+    }
+    get username(): string {
+        return this._username;
+    }
+    set username(value: string) {
+        if (value.length > 0) {
+            this._username = value;
+        }
+    }
+}
+const profile = new UserProfile("Helen");
+profile.username = "Ivy";
+console.log(profile.username); 
+
+
+
+
+
+console.log("Class Implementing Interface");
+
+interface Printable {
+    print(): string;
+}
+class DocumentItem implements Printable {
+    content: string;
+    constructor(content: string) {
+        this.content = content;
+    }
+    print(): string {
+        return this.content;
+    }
+}
+const doc = new DocumentItem("Report");
+console.log(doc.print()); 
