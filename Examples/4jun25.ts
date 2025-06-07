@@ -51,13 +51,13 @@ console.log(add(2, 3)); // Output: 5
 // console.log(add("2", "3")); // Error: Argument of type 'string' is not assignable to parameter of type 'number'
 
 
-interface MathOperation {
+interface MathOperation1 {
   (a: number, b: number): number; // Call signature
 }
 
-const subtract: MathOperation = (x, y) => x - y;
+const subtract1: MathOperation1 = (x, y) => x - y;
 
-console.log(subtract(5, 3)); // Output: 2
+console.log(subtract1(5, 3)); // Output: 2
 
 
 interface Counter {
