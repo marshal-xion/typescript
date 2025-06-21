@@ -17,8 +17,8 @@ Handle edge cases, such as attempting to delete a non-existent task.
  */
 
 
+console.log("TASK MANAGEMENT SYSTEM");
 
-// Enums for Status and Priority
 enum TaskStatus {
   ToDo = "To Do",
   InProgress = "In Progress",
@@ -31,7 +31,6 @@ enum TaskPriority {
   High = "High",
 }
 
-// Interface for Task
 interface Task {
   id: number;
   title: string;
@@ -40,16 +39,19 @@ interface Task {
   priority: TaskPriority;
 }
 
-// Interface for TaskManager
 interface TaskManager {
-  addTask(task: Omit<Task, "id">): Task;  // id is system generated so remove id from task 
+  addTask(task: Omit<Task, "id">): Task;
   updateTaskStatus(id: number, status: TaskStatus): Task | null;
   updateTaskPriority(id: number, priority: TaskPriority): Task | null;
+  updateTaskDetails(id: number, title?: string, description?: string): Task | null;
   deleteTask(id: number): boolean;
+  getTaskById(id: number): Task | null;
   listTasksByStatus(status: TaskStatus): Task[];
+  listTasksByPriority(priority: TaskPriority): Task[];
+  listAllTasks(): Task[];
+  markAllAsDone(): void;
 }
 
-// TaskManager implementation
 class TaskManagerImpl implements TaskManager {
   private tasks: Task[] = [];
   private nextId: number = 1;
@@ -57,36 +59,77 @@ class TaskManagerImpl implements TaskManager {
   addTask(task: Omit<Task, "id">): Task {
     const newTask: Task = { ...task, id: this.nextId++ };
     this.tasks.push(newTask);
+    console.log(`Task added [ID: ${newTask.id}]`);
     return newTask;
   }
 
   updateTaskStatus(id: number, status: TaskStatus): Task | null {
     const task = this.tasks.find((t) => t.id === id);
-    if (!task) return null;
+    if (!task) {
+      console.warn(`Task not found with ID: ${id}`);
+      return null;
+    }
     task.status = status;
     return task;
   }
 
   updateTaskPriority(id: number, priority: TaskPriority): Task | null {
     const task = this.tasks.find((t) => t.id === id);
-    if (!task) return null;
+    if (!task) {
+      console.warn(`Task not found with ID: ${id}`);
+      return null;
+    }
     task.priority = priority;
     return task;
   }
 
+  updateTaskDetails(id: number, title?: string, description?: string): Task | null {
+    const task = this.tasks.find((t) => t.id === id);
+    if (!task) {
+      console.warn(`Task not found with ID: ${id}`);
+      return null;
+    }
+    if (title) task.title = title;
+    if (description) task.description = description;
+    return task;
+  }
+
   deleteTask(id: number): boolean {
-    const taskIndex = this.tasks.findIndex((t) => t.id === id);
-    if (taskIndex === -1) return false;
-    this.tasks.splice(taskIndex, 1);
+    const index = this.tasks.findIndex((t) => t.id === id);
+    if (index === -1) {
+      console.warn(`Cannot delete. Task not found with ID: ${id}`);
+      return false;
+    }
+    this.tasks.splice(index, 1);
     return true;
+  }
+
+  getTaskById(id: number): Task | null {
+    return this.tasks.find((t) => t.id === id) || null;
   }
 
   listTasksByStatus(status: TaskStatus): Task[] {
     return this.tasks.filter((t) => t.status === status);
   }
+
+  listTasksByPriority(priority: TaskPriority): Task[] {
+    return this.tasks.filter((t) => t.priority === priority);
+  }
+
+  listAllTasks(): Task[] {
+    return [...this.tasks];
+  }
+
+  markAllAsDone(): void {
+    this.tasks.forEach(task => task.status = TaskStatus.Done);
+    console.log("All tasks marked as Done.");
+  }
 }
 
-// Example usage
+// =========================
+// ✅ Example Usage
+// =========================
+
 const manager = new TaskManagerImpl();
 
 // Adding tasks
@@ -104,17 +147,24 @@ const task2 = manager.addTask({
   priority: TaskPriority.Medium,
 });
 
-console.log("All tasks:", manager.listTasksByStatus(TaskStatus.ToDo)); // Lists task1
-console.log("In Progress tasks:", manager.listTasksByStatus(TaskStatus.InProgress)); // Lists task2
+const task3 = manager.addTask({
+  title: "Refactor code",
+  description: "Clean up the old module",
+  status: TaskStatus.ToDo,
+  priority: TaskPriority.Low,
+});
 
-// Updating task
-manager.updateTaskStatus(task1.id, TaskStatus.InProgress);
-console.log("Updated task1:", manager.listTasksByStatus(TaskStatus.InProgress)); // Lists task1 and task2
+// List tasks
+console.log("All Tasks:", manager.listAllTasks());
+console.log("Tasks with Priority 'Low':", manager.listTasksByPriority(TaskPriority.Low));
+console.log("Tasks with Status 'To Do':", manager.listTasksByStatus(TaskStatus.ToDo));
 
-// Deleting task
-const deleted = manager.deleteTask(task2.id);
-console.log("Task deleted:", deleted); // true
-console.log("In Progress tasks after deletion:", manager.listTasksByStatus(TaskStatus.InProgress)); // Lists only task1
+// Update title and description
+manager.updateTaskDetails(task3.id, "Refactor UI code", "Improve design structure");
 
-// Attempting to delete non-existent task
-console.log("Delete non-existent task:", manager.deleteTask(999)); // false
+// Mark all as done
+manager.markAllAsDone();
+console.log("All Done Tasks:", manager.listTasksByStatus(TaskStatus.Done));
+
+// Try to delete a non-existing task
+console.log("Deleting non-existent task:", manager.deleteTask(999));
