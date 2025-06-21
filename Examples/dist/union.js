@@ -1,6 +1,7 @@
+"use strict";
 //union 
 console.log("1) =====UNION RESULTS======");
-var value;
+let value;
 value = "name";
 console.log(value); //name
 value = 5;
@@ -26,18 +27,12 @@ console.log("3) =====INSTANCEOF NARROWING======");
 // and you want to check which class it belongs to.
 // You’re using class to create instances
 // You want to narrow by checking an object’s prototype chain
-var Dog = /** @class */ (function () {
-    function Dog() {
-    }
-    Dog.prototype.bark = function () { console.log("woof"); };
-    return Dog;
-}());
-var Cat = /** @class */ (function () {
-    function Cat() {
-    }
-    Cat.prototype.meow = function () { console.log("meow"); };
-    return Cat;
-}());
+class Dog {
+    bark() { console.log("woof"); }
+}
+class Cat {
+    meow() { console.log("meow"); }
+}
 function speak(pet) {
     if (pet instanceof Dog) {
         pet.bark();
@@ -58,9 +53,9 @@ function move(vehicle) {
         console.log("pewpew");
     }
 }
-var myCar = { drive: function () { } };
+const myCar = { drive: () => { } };
 move(myCar);
-var myBoat = { sail: function () { } };
+const myBoat = { sail: () => { } };
 move(myBoat);
 console.log("=====CUSTOM TYPE GUARDS======");
 function isString(value) {
@@ -80,20 +75,20 @@ console.log("5) =====check if admin user  (using in)======");
 function isAdmin(person) {
     return "accessLevel" in person; // checks if person object has key accesslevel
 }
-var admin1 = { role: "admin", accessLevel: 3 };
-var user1 = { username: "hello" };
+const admin1 = { role: "admin", accessLevel: 3 };
+const user1 = { username: "hello" };
 console.log(isAdmin(admin1));
 console.log(isAdmin(user1));
 function printPerson(person) {
     if ("accessLevel" in person) {
-        console.log("Admin with access: ".concat(person.accessLevel));
+        console.log(`Admin with access: ${person.accessLevel}`);
     }
     else {
-        console.log("User: ".concat(person.username));
+        console.log(`User: ${person.username}`);
     }
 }
-var ad1 = { role: "admin", accessLevel: 4 };
-var u1 = { username: "meena" };
+const ad1 = { role: "admin", accessLevel: 4 };
+const u1 = { username: "meena" };
 printPerson(ad1);
 printPerson(u1);
 console.log("6) Double Value (string = repeat, number = double)");
@@ -126,6 +121,8 @@ printVal(null);
 printVal("hello");
 printVal(undefined);
 console.log("8) Custom Type guard ");
+//value is string is type guarding string where if value is string 
+// then it will return true (typeof value === "string")
 function isString1(value) {
     return typeof value === "string";
 }
@@ -137,6 +134,5 @@ function log(value) {
         console.log(value.toFixed(1));
     }
 }
-console.log("end");
 log("Hello");
 log(5);

@@ -1,9 +1,22 @@
 {
   "compilerOptions": {
-    "target": "ES2015", // or "ES6", "ESNext", etc.
-    "lib": ["ES2015", "DOM"], // Include ES2015 for Iterator types, DOM for console.log
-    "module": "CommonJS", // or your preferred module system
+    "target": "es2022", 
+    "lib": ["es2022", "dom", "dom.iterable"],  
+    "module": "es2022", // or your preferred module system
     "strict": true, // Optional: Enables strict type checking
-    "esModuleInterop": true // Optional: Improves module interoperability
-  }
+    "esModuleInterop": true, // Optional: Improves module interoperability
+    "outDir": "dist",
+  },
+
+  "include": [
+    "4jun25.ts",
+    "7jun25.ts",
+    "27may25.ts",
+    "29may25.ts",
+    "generics.ts",
+    "mixins.ts",
+    "shoppingcart.ts",
+    "union.ts",
+    "TMS.ts",
+  ]
 }

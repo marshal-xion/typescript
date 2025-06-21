@@ -1,12 +1,5 @@
+"use strict";
 //tsc .\mixins.ts --target ES2016 --lib ES2016,DOM
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 function Validatable(Base) {
     return class extends Base {
         validateEmail(email) {
@@ -27,8 +20,8 @@ class UserModel extends Validatable(BaseModel) {
         console.log("User created:", name, email);
     }
 }
-const user = new UserModel();
-user.createUser("Tab", "john@example.com");
+const userab = new UserModel();
+userab.createUser("Tab", "john@example.com");
 //2. Role-Based Access Control (RBAC) Mixin
 function RoleCheck(Base) {
     return class extends Base {
@@ -52,10 +45,7 @@ admin.deleteUser("123", ["admin", "editor"]);
 //Cachable Mixin
 function Cachable(Base) {
     return class extends Base {
-        constructor() {
-            super(...arguments);
-            this.cache = new Map();
-        }
+        cache = new Map();
         getFromCache(key) {
             return this.cache.get(key);
         }
@@ -67,16 +57,14 @@ function Cachable(Base) {
 class DataFetcher {
 }
 class UserFetcher extends Cachable(DataFetcher) {
-    fetchUser(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const cached = this.getFromCache(id);
-            if (cached)
-                return cached;
-            // Simulate API call
-            const result = { id, name: "Alice" };
-            this.setCache(id, result);
-            return result;
-        });
+    async fetchUser(id) {
+        const cached = this.getFromCache(id);
+        if (cached)
+            return cached;
+        // Simulate API call
+        const result = { id, name: "Alice" };
+        this.setCache(id, result);
+        return result;
     }
 }
 const fetcher = new UserFetcher();
@@ -84,11 +72,8 @@ fetcher.fetchUser("u123").then(console.log);
 //Auditable Mixin
 function Auditable(Base) {
     return class extends Base {
-        constructor() {
-            super(...arguments);
-            this.createdAt = new Date();
-            this.updatedAt = new Date();
-        }
+        createdAt = new Date();
+        updatedAt = new Date();
         touch() {
             this.updatedAt = new Date();
         }
@@ -134,4 +119,4 @@ doc.updateContent();
 // RoleCheck	Enforce role-based access control
 // Cachable	Cache/memoize expensive operations
 // Auditable	Track timestamps on changes
-// WithEvents	Add event-emitting to service/logic classes 
+// WithEvents	Add event-emitting to service/logic classes

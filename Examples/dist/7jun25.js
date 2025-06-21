@@ -1,13 +1,5 @@
+"use strict";
 //tsc .\7jun25.ts --target ES2015 --lib ES2015,DOM
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 console.log("Basic Function Declaration");
 function calculateSum(a, b) {
     return a + b;
@@ -60,10 +52,8 @@ function processData(data, callback) {
 }
 processData("hello", result => console.log(result));
 console.log("Async Function");
-function fetchData() {
-    return __awaiter(this, void 0, void 0, function* () {
-        return new Promise(resolve => setTimeout(() => resolve("Data fetched"), 2000));
-    });
+async function fetchData() {
+    return new Promise(resolve => setTimeout(() => resolve("Data fetched"), 2000));
 }
 fetchData().then(data => console.log(data));
 console.log("Generator Function");
@@ -120,19 +110,28 @@ function factorial(n) {
     return n === 0 ? 1 : n * factorial(n - 1);
 }
 console.log(factorial(5));
+/*
 console.log("Basic Class");
+
 class Person {
-    constructor(name) {
+    name: string;
+    constructor(name: string){
         this.name = name;
     }
-    greet() {
+    
+    greet(): string {
         return `Hello, ${this.name}`;
     }
 }
+
 const person = new Person("Frank");
 console.log(person.greet());
+
+ */
 console.log("Class with Public and Private Members");
 class Employee {
+    id;
+    name;
     constructor(id, name) {
         this.id = id;
         this.name = name;
@@ -145,6 +144,7 @@ const emp = new Employee(1, "Grace");
 console.log(emp.getDetails());
 console.log("Class with Protected Members");
 class Manager {
+    department;
     constructor(department) {
         this.department = department;
     }
@@ -158,6 +158,7 @@ const sm = new SeniorManager("IT");
 console.log(sm.getDepartment());
 console.log("Class with Readonly Property");
 class Product {
+    productId;
     constructor(productId) {
         this.productId = productId;
     }
@@ -166,6 +167,7 @@ const prod = new Product(101);
 console.log(prod.productId);
 console.log("Class with Static Members");
 class Counter {
+    static count = 0;
     constructor() {
         Counter.count++; // static count needs to be called with classname
     }
@@ -173,7 +175,6 @@ class Counter {
         return Counter.count;
     }
 }
-Counter.count = 0;
 console.log(Counter.getCount());
 new Counter();
 new Counter();
@@ -182,6 +183,7 @@ console.log("Abstract Class");
 class Shape {
 }
 class Square extends Shape {
+    side;
     constructor(side) {
         super();
         this.side = side;
@@ -194,6 +196,7 @@ const square = new Square(4);
 console.log(square.getArea());
 console.log("Class with Getters and Setters");
 class UserProfile {
+    _username;
     constructor(username) {
         this._username = username;
     }
@@ -211,6 +214,7 @@ profile.username = "Ivy";
 console.log(profile.username);
 console.log("Class Implementing Interface");
 class DocumentItem {
+    content;
     constructor(content) {
         this.content = content;
     }
@@ -218,5 +222,5 @@ class DocumentItem {
         return this.content;
     }
 }
-const doc = new DocumentItem("Report");
-console.log(doc.print());
+const doc1 = new DocumentItem("Report");
+console.log(doc1.print());

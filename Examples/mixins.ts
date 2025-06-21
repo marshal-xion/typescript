@@ -32,8 +32,8 @@ class UserModel extends Validatable(BaseModel) {
   }
 }
 
-const user = new UserModel();
-user.createUser("Tab", "john@example.com");
+const userab = new UserModel();
+userab.createUser("Tab", "john@example.com");
 
 
 

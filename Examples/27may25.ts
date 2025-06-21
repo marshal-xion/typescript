@@ -8,18 +8,18 @@ console.log(sumArray([5])); // Output: 5
 
 
 
-interface User {
+interface Usear {
     name: string;
     age: number;
     isActive: boolean;
 }
 
-function getActiveUsers(users: User[]): User[]{
+function getActiveUsers(users: Usear[]): Usear[]{
     return users.filter(user => user.isActive);
 }
 
 
-const users: User[] = [
+const users: Usear[] = [
     { name: "Alice", age: 25, isActive: true },
     { name: "Bob", age: 30, isActive: false },
     { name: "Charlie", age: 35, isActive: true }
@@ -67,7 +67,7 @@ interface j1 {
     greet(message: string): void;
 }
 
-const u1: j1 = {
+const uu1: j1 = {
     name: "jane",
     greet(message:string){
         console.log(`${message}, ${this.name}!`);
@@ -76,7 +76,7 @@ const u1: j1 = {
 
 const v1 = {name:"toy"};
 
-u1.greet.call(v1, "hello"); // output hello toy!
+uu1.greet.call(v1, "hello"); // output hello toy!
 
 
 
@@ -89,16 +89,16 @@ interface User1 {
 
 const User1: User1 = {
   name: "Alice",
-  greet(message: string, punctuation: string) {
+  greet(message: string | [], punctuation: string | []) {
     console.log(`${message}, ${this.name}${punctuation}`);
   },
 };
 
 const anotherUser1 = { name: "Bob" };
-const args = ["Hi", "!"];
+const args1: [string, string] = ["Hi", "!"];
 
 // Borrow the greet method and call it with arguments as an array
-User1.greet.apply(anotherUser1, args); // Output: Hi, Bob!
+User1.greet.apply(anotherUser1, args1); // Output: Hi, Bob!
 
 
 //bind

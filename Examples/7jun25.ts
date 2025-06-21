@@ -239,7 +239,7 @@ console.log(factorial(5));
 
 
 
-
+/* 
 console.log("Basic Class");
 
 class Person {
@@ -256,7 +256,7 @@ class Person {
 const person = new Person("Frank");
 console.log(person.greet());
 
-
+ */
 
 
 
@@ -399,5 +399,5 @@ class DocumentItem implements Printable {
         return this.content;
     }
 }
-const doc = new DocumentItem("Report");
-console.log(doc.print()); 
+const doc1 = new DocumentItem("Report");
+console.log(doc1.print()); 

@@ -99,8 +99,12 @@ function main(){
 
         cart.displayCart();
 
-    } catch (error){
-        console.error("Error", error.message);
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error("Error:", error.message);
+        } else {
+            console.error("Unknown error:", error);
+        }
     }
 }
 
