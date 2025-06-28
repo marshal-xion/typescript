@@ -18,5 +18,6 @@
     "shoppingcart.ts",
     "union.ts",
     "TMS.ts",
+    "gen_stck_impl.ts",
   ]
 }
