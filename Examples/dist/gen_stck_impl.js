@@ -29,15 +29,24 @@ class Staack {
         return this.items.length;
     }
 }
+// Function to reverse an array using a generic Stack
 function reveerseArray(arr) {
+    // Create a new stack instance to hold the array elements
     const stack = new Staack();
+    // Push each item from the original array onto the stack
     for (const item of arr) {
         stack.push(item);
     }
+    // Initialize an array to store the reversed elements
     const reversed = [];
+    // Pop elements from the stack and push them into the reversed array
+    // This will reverse the order since a stack is LIFO (Last In, First Out)
     while (!stack.isEmpty()) {
+        // It tells the TypeScript compiler: “I know this value is not null or undefined, 
+        // even if the type system thinks it might be.”
         reversed.push(stack.pop());
     }
+    // Return the reversed array
     return reversed;
 }
 const numberStaack = new Staack();
