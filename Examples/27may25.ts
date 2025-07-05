@@ -1,3 +1,16 @@
+/* 
+
+Contents:
+Array - filter
+Array - slice, reverse
+Readonly array
+call, apply, bind
+partials 
+
+
+*/
+
+
 
 function sumArray(numbers: number[]): number {
     return numbers.reduce((sum, num) => sum + num, 0);
@@ -127,3 +140,116 @@ boundGreet("Hey"); // Output: Hey, Bob!
 // Example with preset arguments
 const boundGreetWithMessage = User2.greet.bind(anotherUser2, "Hello");
 boundGreetWithMessage(); // Output: Hello, Bob!
+
+
+
+console.log("............Partial Examples.................");
+
+//used timestamps to avoid collisions
+//user profile update
+
+interface UserProfile_20250705 {
+  id: number;
+  name: string;
+  email: string;
+  age: number;
+}
+
+function updateUserProfile_20250705(user: UserProfile_20250705, updates: Partial<UserProfile_20250705>): UserProfile_20250705 {
+  return { ...user, ...updates };
+}
+
+const user_20250705: UserProfile_20250705 = {
+  id: 1,
+  name: "Alice",
+  email: "alice@example.com",
+  age: 30,
+};
+
+const updatedUser_20250705 = updateUserProfile_20250705(user_20250705, {age: 31,});
+console.log(updatedUser_20250705);
+
+
+//config override
+
+interface Config_20250705 {
+  host: string;
+  port: number;
+  useSSL: boolean;
+}
+
+const defaultConfig_20250705: Config_20250705 = {
+  host: "localhost",
+  port: 8080,
+  useSSL: false,
+};
+
+function createConfig_20250705(
+  overrides: Partial<Config_20250705>
+): Config_20250705 {
+  return { ...defaultConfig_20250705, ...overrides };
+}
+
+const myConfig_20250705 = createConfig_20250705({ port: 3000 });
+console.log(myConfig_20250705);
+
+
+
+//Form Validation
+
+interface RegistrationForm_20250705 {
+  username: string;
+  password: string;
+  email: string;
+}
+
+function validateRegistrationForm_20250705( form: Partial<RegistrationForm_20250705> ): string[] {
+  const errors_20250705: string[] = [];
+
+  if (!form.username) errors_20250705.push("Username is required");
+  if (!form.password) errors_20250705.push("Password is required");
+  if (!form.email) errors_20250705.push("Email is required");
+
+  return errors_20250705;
+}
+
+const formInput_20250705 = {
+  username: "newuser",
+};
+
+const formErrors_20250705 = validateRegistrationForm_20250705(formInput_20250705);
+console.log(formErrors_20250705);
+
+
+//Reset Object Fields
+
+interface Product_20250705 {
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+}
+
+function resetProductFields_20250705(
+  product: Product_20250705,
+  fieldsToReset: (keyof Product_20250705)[]
+): Product_20250705 {
+  const resetObj_20250705: Partial<Product_20250705> = {};
+  for (const field of fieldsToReset) {
+    resetObj_20250705[field] = undefined as any;
+  }
+  return { ...product, ...resetObj_20250705 };
+}
+
+const product_20250705: Product_20250705 = {
+  id: 101,
+  name: "Laptop",
+  price: 1000,
+  description: "Gaming laptop",
+};
+
+const resetProduct_20250705 = resetProductFields_20250705(product_20250705, [
+  "description",
+  "price",
+]);
+console.log(resetProduct_20250705);

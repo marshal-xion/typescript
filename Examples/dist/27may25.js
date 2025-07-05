@@ -1,4 +1,15 @@
 "use strict";
+/*
+
+Contents:
+Array - filter
+Array - slice, reverse
+Readonly array
+call, apply, bind
+partials
+
+
+*/
 function sumArray(numbers) {
     return numbers.reduce((sum, num) => sum + num, 0);
 }
@@ -65,3 +76,58 @@ boundGreet("Hey"); // Output: Hey, Bob!
 // Example with preset arguments
 const boundGreetWithMessage = User2.greet.bind(anotherUser2, "Hello");
 boundGreetWithMessage(); // Output: Hello, Bob!
+console.log("............Partial Examples.................");
+function updateUserProfile_20250705(user, updates) {
+    return { ...user, ...updates };
+}
+const user_20250705 = {
+    id: 1,
+    name: "Alice",
+    email: "alice@example.com",
+    age: 30,
+};
+const updatedUser_20250705 = updateUserProfile_20250705(user_20250705, { age: 31, });
+console.log(updatedUser_20250705);
+const defaultConfig_20250705 = {
+    host: "localhost",
+    port: 8080,
+    useSSL: false,
+};
+function createConfig_20250705(overrides) {
+    return { ...defaultConfig_20250705, ...overrides };
+}
+const myConfig_20250705 = createConfig_20250705({ port: 3000 });
+console.log(myConfig_20250705);
+function validateRegistrationForm_20250705(form) {
+    const errors_20250705 = [];
+    if (!form.username)
+        errors_20250705.push("Username is required");
+    if (!form.password)
+        errors_20250705.push("Password is required");
+    if (!form.email)
+        errors_20250705.push("Email is required");
+    return errors_20250705;
+}
+const formInput_20250705 = {
+    username: "newuser",
+};
+const formErrors_20250705 = validateRegistrationForm_20250705(formInput_20250705);
+console.log(formErrors_20250705);
+function resetProductFields_20250705(product, fieldsToReset) {
+    const resetObj_20250705 = {};
+    for (const field of fieldsToReset) {
+        resetObj_20250705[field] = undefined;
+    }
+    return { ...product, ...resetObj_20250705 };
+}
+const product_20250705 = {
+    id: 101,
+    name: "Laptop",
+    price: 1000,
+    description: "Gaming laptop",
+};
+const resetProduct_20250705 = resetProductFields_20250705(product_20250705, [
+    "description",
+    "price",
+]);
+console.log(resetProduct_20250705);
